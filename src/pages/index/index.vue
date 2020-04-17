@@ -62,16 +62,16 @@
         top5: ['今日Top5'],
         visit: ['图书榜'],
         imgUrls: [
-          'https://img3.doubanio.com/view/ark_article_cover/retina/public/110136604.jpg?v=1553852504',
+          'http://img3m9.ddimg.cn/15/30/1043274489-1_f_3.jpg',
           'https://img3.doubanio.com/view/subject/m/public/s32295155.jpg',
           'https://img3.doubanio.com/view/subject/m/public/s30021282.jpg',
         ],
         iconMap: {
-          'icon-caigou': {title: '人文社科', bk: '#EF8B3E'}, 
-          'icon-shangpin': {title: '自然科学', bk: '#E4463B'},
-          'icon-touchengkongyun': {title: '历史', bk: '#8B67E5'},
-          'icon-daohang': {title: '哲学', bk: '#5DC7B0'},
-          'icon-zitigui': {title: '古书', bk: '#F3AE42'}
+          'icon-caigou': {title: '英语试题', bk: '#EF8B3E'}, 
+          'icon-shangpin': {title: '英语词典', bk: '#E4463B'},
+          'icon-touchengkongyun': {title: '英语小说', bk: '#8B67E5'},
+          'icon-daohang': {title: '英语作文', bk: '#5DC7B0'},
+          'icon-zitigui': {title: '教材教辅', bk: '#F3AE42'}
         },
       }
     },

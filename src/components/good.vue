@@ -19,11 +19,11 @@
       	return {
       		good: {
 	        	goodId: '100',
-    				img: 'https://img3.doubanio.com/lpic/s29509182.jpg',
-    				mainTitle: '时间简史',
-    				subTitle: '非常棒的一本科普图书',
+    				img: 'http://img3m8.ddimg.cn/37/33/1050155308-1_w_1.jpg',
+    				mainTitle: '英文原版 了不起的盖茨比',
+    				subTitle: '非常棒的小说',
     				distance: '1.7',
-    				price: '38',
+    				price: '35.00',
     				sales: '42739',
 	        },
       	}

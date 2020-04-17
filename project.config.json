@@ -7,7 +7,7 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"miniprogramRoot": "dist/",
+	"miniprogramRoot": "dist/wx",
 	"compileType": "miniprogram",
 	"appid": "wxe8a9c4a2c7045f34",
 	"projectname": "wxapp",
