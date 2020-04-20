@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="train-btn">
-      <div class="train-btn-Btn">
+      <div class="train-btn-Btn" @click="gotoRemberWord">
         开始学习
       </div>
     </div>
@@ -30,15 +30,18 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       dayNumber: 210
-    }
+    };
   },
   methods: {
-    modifyPlan () {}
+    modifyPlan() {},
+    gotoRemberWord() {
+      wx.navigateTo({ url: "/pages/englishWords/remberWord/main" });
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -113,7 +116,7 @@ $circleData: 3rem;
         vertical-align: middle;
       }
     }
-    .train-plan-list{
+    .train-plan-list {
       width: 90%;
       height: 0.6rem;
       margin-left: 0.2rem;
@@ -141,7 +144,7 @@ $circleData: 3rem;
       -moz-border-radius: 0;
       -webkit-border-radius: 0.2rem;
       border-radius: 0.2rem;
-      color:white;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;

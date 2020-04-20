@@ -23,8 +23,9 @@ export default {
   config: {
     // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
     pages: [
-      "pages/englishWords/index/main",
-      "^pages/index/main",
+      "^pages/englishWords/index/main",
+      "pages/englishWords/remberWord/main",
+      "pages/index/main",
       "pages/orderList/main",
       "pages/self/main",
       "pages/orderDetail/main",
@@ -46,7 +47,8 @@ export default {
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",
       "i-tabs": "static/iview/tabs/index",
-      "i-tab": "static/iview/tab/index"
+      "i-tab": "static/iview/tab/index",
+      "i-icon": "static/iview/icon/index"
     },
     tabBar: {
       borderStyle: "white",
