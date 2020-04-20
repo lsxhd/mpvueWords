@@ -9,7 +9,7 @@
       <div class="train-plan">
         <div class="train-plan-title">
           <span>学习计划</span>
-          <div class="train-plan-Btn">
+          <div @click="upadatePlan" class="train-plan-Btn">
             修改
           </div>
         </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { getOpenIdEnd } from "@/dao/modules/user";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -39,6 +41,9 @@ export default {
     modifyPlan() {},
     gotoRemberWord() {
       wx.navigateTo({ url: "/pages/englishWords/remberWord/main" });
+    },
+    upadatePlan() {
+      wx.navigateTo({ url: "/pages/englishWords/updatePlan/main" });
     }
   }
 };

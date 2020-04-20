@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { getOpenIdEnd } from "@/dao/modules/user";
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {

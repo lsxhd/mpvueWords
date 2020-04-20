@@ -25,6 +25,7 @@ export default {
     pages: [
       "^pages/englishWords/index/main",
       "pages/englishWords/remberWord/main",
+      "pages/englishWords/updatePlan/main",
       "pages/index/main",
       "pages/orderList/main",
       "pages/self/main",
@@ -48,7 +49,16 @@ export default {
       "i-button": "static/iview/button/index",
       "i-tabs": "static/iview/tabs/index",
       "i-tab": "static/iview/tab/index",
-      "i-icon": "static/iview/icon/index"
+      "i-icon": "static/iview/icon/index",
+      "i-card": "static/iview/card/index",
+      "i-cell-group": "static/iview/cell-group/index",
+      "i-cell": "static/iview/cell/index",
+      "i-modal": "static/iview/modal/index",
+      "i-radio-group": "static/iview/radio-group/index",
+      "i-radio": "static/iview/radio/index",
+      "i-input-number": "static/iview/input-number/index",
+      "i-tag": "static/iview/tag/index",
+      "i-divider": "static/iview/divider/index"
     },
     tabBar: {
       borderStyle: "white",
