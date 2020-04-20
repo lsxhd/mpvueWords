@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App";
 import { openWin, redirectTo, backBeaforWin, Ajax } from "./utils/common";
-import store from "./utils/store";
+import store from "./store/index";
 import "./css/common.css";
 import "./css/iconfont.css";
 

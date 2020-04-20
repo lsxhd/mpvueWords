@@ -12,7 +12,7 @@
         class="ub-flex-1 z-font-size-18 z-color-333 ub-box ub-ver-v z-padding-h-10-px"
       >
         <button
-          v-if="isLogin === false"
+          v-if="!token"
           class="loginBtn"
           lang="zh_CN"
           open-type="getUserInfo"
@@ -20,16 +20,16 @@
         >
           登录
         </button>
-        <ul v-if="isLogin === true" class="ub-box z-margin-left-10-px ub-col">
+        <ul v-else class="ub-box z-margin-left-10-px ub-col">
           <li class="z-font-size-16 z-color-333 z-margin-bottom-5-px">
-            {{ userInfo.nickName }}
+            {{ userName }}
           </li>
-          <li class="z-font-size-14 z-color-888">
-            {{ userInfo.province }} {{ userInfo.city }} {{ userInfo.gender }}
-          </li>
+          <!-- <li class="z-font-size-14 z-color-888">
+            {{ userName }} {{ userName }} {{ userName }}
+          </li> -->
         </ul>
       </dd>
-      <dd class="z-font-size-18 z-color-333 ub-box ub-ver-v">
+      <dd v-if="token"  class="z-font-size-18 z-color-333 ub-box ub-ver-v">
         <div
           @click.stop="exitLogin()"
           class="exitBtn ub-box ub-ver z-font-size-14"
@@ -134,10 +134,17 @@
   </div>
 </template>
 <script>
+import { getOpenIdEnd } from "@/dao/modules/user";
+import { mapState, mapMutations } from "vuex";
 export default {
   computed: {
+    ...mapState("user", {
+      userName: state => state.userInfo.userName,
+      token: state => state.userInfo.token
+    }),
     isLogin() {
-      return this.$store.state.isLogin;
+      return false;
+      // || this.$store.state.isLogin
     },
     userInfo() {
       return this.$store.state.userInfo;
@@ -147,13 +154,76 @@ export default {
     return {};
   },
   methods: {
+    ...mapMutations("user", ["loginEnd", "checkoutEnd"]),
     onGetUserInfo(e) {
-      this.$store.commit("updateIsLogin", true);
-      this.$store.commit("updateUser", e.mp.detail.userInfo);
+      console.log("登录");
+      console.log(e, e.target.userInfo);
+      if (e.target.userInfo) {
+        // this.userName=e.target.userInfo.nickName;
+        // this.isCeng=false;
+        this.isLogin();
+      } else {
+        // this.userName="";
+        // this.isCeng=true;
+      }
+      // wx.login()
+      // this.$store.commit("updateIsLogin", true);
+      // this.$store.commit("updateUser", e.mp.detail.userInfo);
+    },
+    isLogin() {
+      var _this = this;
+      wx.getSetting({
+        success(res) {
+          if (!res.authSetting["scope.userInfo"]) {
+            //未授权getUserInfo
+            console.log("未授权：", res);
+            wx.authorize({
+              scope: "scope.getUserInfo",
+              success(res) {
+                // 用户已经同意小程序使用用户信息，后续调用 wx.userInfo 接口不会弹窗询问
+                console.log("同意授权：", res);
+                // _this.isCeng = false;
+                // _this.userName = res.target.userInfo.nickName;
+              },
+              fail(err) {
+                console.log(err);
+              }
+            });
+          } else {
+            //已授权
+            console.log("已授权：");
+            wx.getUserInfo({
+              success(res) {
+                console.log("获取用户信息", res);
+                _this.getOpenId(res);
+              },
+              fail(err) {
+                console.log(err);
+              }
+            });
+          }
+        }
+      });
+    },
+    getOpenId(userInfo) {
+      //获取用户的openid
+      let user = JSON.parse(userInfo.rawData);
+      let _this = this;
+      wx.login({
+        success(res) {
+          console.log("wx.login", res);
+          user.code = res.code;
+          user.userName = user.nickName;
+          console.log("传入user", user);
+          getOpenIdEnd(user).then(res => {
+            console.log(res.data.data);
+            _this.loginEnd(res.data.data);
+          });
+        }
+      });
     },
     exitLogin() {
-      this.$store.commit("updateIsLogin", false);
-      this.$store.commit("cleanUserInfo");
+      this.checkoutEnd();
     },
     gotoOrderList() {
       wx.switchTab({ url: "/pages/orderList/main" });

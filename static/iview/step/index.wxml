@@ -52,7 +52,7 @@ module.exports = {
         }
     },
     getClass : function( status,current,index ) {
-        //wait、process、finish、error
+        //wait〝process〝finish〝error
         var startClass = 'i-step-'
         var classes = '';
         var cindex = allStatus.indexOf( status );

@@ -21,6 +21,31 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
   },
+  // devServer: {
+	// 	proxy: {
+	// 		'/vpa/tmp': {
+	// 			target: 'http://localhost:8000/mock',
+
+	// 			changeOrigin: true
+	// 		},
+	// 		'/vpa': {
+	// 			// target: "http://172.31.223.250:8769",
+	// 			target: 'http://172.31.198.24:18769',
+	// 			// target: "http://172.31.198.24:8769",
+	// 			ws: true,
+	// 			changeOrigin: true
+	// 		},
+	// 		'vpa/skill': {
+	// 			// target: 'http://172.31.223.250:8086', // 开发
+	// 			target: 'http://172.31.198.24:18086', // 测试
+	// 			// target: 'http://aiuiweb.xfyun.cn', // 灰度
+	// 			// target: 'http://aquadev.iflytekauto.cn', // 现网
+	// 			// target: 'http://10.5.120.131:9090', // 张昊
+	// 			// target: 'http://10.5.120.118:9090', // 肖行镇
+	// 			changeOrigin: true
+	// 		}
+	// 	}
+	// },
   dev: {
     env: require('./dev.env'),
     port: 8080,

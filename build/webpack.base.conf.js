@@ -41,6 +41,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
+      'axios': 'axios/dist/axios',
       '@': resolve('src')
     },
     symlinks: false
