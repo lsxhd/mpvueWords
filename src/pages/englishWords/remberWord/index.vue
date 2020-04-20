@@ -42,10 +42,9 @@
 export default {
   data() {
     return {
-      speakUrl: "http://dict.youdao.com/dictvoice?audio=",
-      current: "train",
       isTranslt: false,
       wordCount: 0,
+      word: {},
       wordList: [
         {
           word: "abandon",
@@ -75,12 +74,21 @@ export default {
       innerAudioContext: ""
     };
   },
+  computed: {
+    speakUrl() {
+      return (
+        "http://dict.youdao.com/dictvoice?audio=" +
+        this.wordList[this.wordCount].word
+      );
+    }
+  },
   mounted() {
     this.setSpeakUrl();
   },
   watch: {
     wordCount(newWo) {
       console.log("wordCount变化", newWo);
+      this.setSpeakUrl();
     }
   },
   methods: {
@@ -89,8 +97,8 @@ export default {
     },
     setSpeakUrl() {
       this.innerAudioContext = wx.createInnerAudioContext();
-      this.innerAudioContext.src =
-        this.speakUrl + this.wordList[wordCount].word;
+      this.innerAudioContext.src = this.speakUrl;
+      console.log(this.innerAudioContext.src);
       this.play();
       //音频的数据链接，用于直接播放。支持云文件ID（2.2.3起）。
     },
@@ -102,11 +110,18 @@ export default {
     stop() {
       this.innerAudioContext.pause();
     },
+    computeWordCount() {
+      if (this.wordCount < this.wordList.length - 1) {
+        this.wordCount++;
+      } else {
+        console.log("已经学习完毕")
+      }
+    },
     konwWord() {
-      this.wordCount++;
+      this.computeWordCount();
     },
     unKonwWord() {
-      this.wordCount++;
+      this.computeWordCount();
     }
   }
 };
