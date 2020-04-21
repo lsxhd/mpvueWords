@@ -1,30 +1,32 @@
 <template>
-  <div class="word">
+  <view class="word">
     <i-tabs :current="current" scroll @change="handleChange">
       <i-tab key="train" title="训练"> </i-tab>
       <i-tab key="record" title="记录"></i-tab>
     </i-tabs>
-    <div v-show="current === 'train'">
+    <view v-show="current === 'train'">
       <train></train>
-    </div>
-    <div v-show="current === 'record'">
-      ????
-    </div>
-  </div>
+    </view>
+    <view v-show="current === 'record'">
+      <record></record>
+    </view>
+  </view>
 </template>
 
 <script>
 import train from "@/components/word/train";
+import record from "@/components/word/record";
 
 export default {
   data() {
     return {
-      current: "train"
+      current: "record"
     };
   },
 
   components: {
-    train
+    train,
+    record
   },
 
   methods: {

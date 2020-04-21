@@ -58,7 +58,11 @@ export default {
       "i-radio": "static/iview/radio/index",
       "i-input-number": "static/iview/input-number/index",
       "i-tag": "static/iview/tag/index",
-      "i-divider": "static/iview/divider/index"
+      "i-divider": "static/iview/divider/index",
+      "i-grid": "static/iview/grid/index",
+      "i-grid-item": "static/iview/grid-item/index",
+      "i-grid-icon": "static/iview/grid-icon/index",
+      "i-grid-label": "static/iview/grid-label/index"
     },
     tabBar: {
       borderStyle: "white",
@@ -67,7 +71,7 @@ export default {
       color: "#666",
       list: [
         {
-          pagePath: "pages/englishWords/index/main",
+          pagePath: "pages/englishWords/shouye/main",
           iconPath: "static/images/tab1.png",
           selectedIconPath: "static/images/tab1-s.png",
           text: "首页"
