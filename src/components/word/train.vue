@@ -8,6 +8,7 @@
     <div class="train-content">
       <div class="train-plan">
         <div class="train-plan-title">
+          {{ plan.numberDay }}
           <span>学习计划</span>
           <div @click="upadatePlan" class="train-plan-Btn">
             修改
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import { getOpenIdEnd } from "@/dao/modules/user";
+import { getPlan } from "@/dao/modules/plan";
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
@@ -37,7 +38,34 @@ export default {
       dayNumber: 210
     };
   },
+  computed: {
+    ...mapState("plan", {
+      plan: state => state.plan,
+      tag: state => state.tag
+    }),
+    ...mapState("user", {
+      isLogin: state => state.isLogin
+    })
+  },
+  mounted() {
+    if (this.isLogin) {
+      getPlan().then(res => {
+        console.log(res);
+        this.setPlanAndTag(res.data.data.plan, res.data.data.tag);
+      });
+    }
+  },
+  watch: {
+    isLogin(isLogin) {
+      if (this.isLogin) {
+        getPlan().then(res => {
+          this.setPlanAndTag(res.data.data.plan, res.data.data.tag);
+        });
+      }
+    }
+  },
   methods: {
+    ...mapMutations("plan", ["setPlanAndTag"]),
     modifyPlan() {},
     gotoRemberWord() {
       wx.navigateTo({ url: "/pages/englishWords/remberWord/main" });

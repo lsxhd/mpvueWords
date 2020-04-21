@@ -3,6 +3,7 @@ const STORAGE_KEY_USER_TOKEN = "token";
 const user = {
   namespaced: true,
   state: {
+    isLogin: false,
     userInfo: wx.getStorageSync(STORAGE_KEY_USER_INFO)
       ? JSON.parse(wx.getStorageSync(STORAGE_KEY_USER_INFO))
       : {
@@ -22,6 +23,7 @@ const user = {
         JSON.stringify(state.userInfo.token)
       );
       wx.setStorageSync(STORAGE_KEY_USER_INFO, JSON.stringify(state.userInfo));
+      state.isLogin = true;
     },
     //退出登陆
     checkoutEnd(state) {
@@ -35,6 +37,7 @@ const user = {
             userName: "",
             openId: ""
           };
+      state.isLogin = false;
     },
     getUserInfo(state) {
       return state.userInfo;
