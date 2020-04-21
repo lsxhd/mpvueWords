@@ -23,10 +23,10 @@ export default {
   config: {
     // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
     pages: [
-      "^pages/englishWords/shouye/main",
+      "pages/englishWords/shouye/main",
       "pages/englishWords/remberWord/main",
       "pages/englishWords/updatePlan/main",
-      "pages/index/main",
+      "^pages/index/main",
       "pages/orderList/main",
       "pages/self/main",
       "pages/orderDetail/main",
@@ -45,6 +45,8 @@ export default {
       // enablePullDownRefresh: true
     },
     usingComponents: {
+      "van-button": "./static/vantWeapp/button/index",
+      "van-card": "./static/vantWeapp/card/index",
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",
       "i-tabs": "static/iview/tabs/index",

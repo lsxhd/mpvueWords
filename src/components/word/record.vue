@@ -1,6 +1,7 @@
 <template>
   <div class="recode">
     <div class="" style="margin-top: 16px">
+      <van-button block type="info">默认按钮</van-button>
       <i-card
         title="单词本"
         extra=">"
