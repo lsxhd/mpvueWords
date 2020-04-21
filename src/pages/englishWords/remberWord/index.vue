@@ -2,8 +2,11 @@
   <div class="remberWord">
     <div class="top">
       <div class="word" @click.stop="play">
-        <p>{{ wordList[wordCount].word }}</p>
-        <p>{{ wordList[wordCount].phonetic }}<i-icon type="systemprompt" /></p>
+        <p>{{ wordList[wordCount].word || "无数据" }}</p>
+        <p>
+          {{ wordList[wordCount].phonetic || "无数据"
+          }}<i-icon type="systemprompt" />
+        </p>
       </div>
       <div class="translt">
         <div class="cover-translt" v-if="!isTranslt" @click.stop="showTranslt">
@@ -39,7 +42,9 @@
 </template>
 
 <script>
-import { getOpenIdEnd } from "@/dao/modules/user";
+import { selectNewWord } from "@/dao/modules/word";
+import { saveStudyWord } from "@/dao/modules/study";
+
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
@@ -49,57 +54,52 @@ export default {
       word: {},
       wordList: [
         {
-          word: "abandon",
-          trans: "n. 狂热；放任 <br>vt. 遗弃；放弃 <br>abandon: 放弃|确认期权失效|委付 <br>Call abandon: 呼叫中途挂机 <br>abandon  v: 放弃".split(
-            "<br>"
-          ),
-          phonetic: "[ə'bændən]",
-          tag_id: 1
-        },
-        {
-          word: "ability",
-          trans: "n. 能力，能耐；才能 <br>Ability: 力|能力|本领 <br>encapsulating ability: 包被抑制性 <br>limited ability: 有限能力".split(
-            "<br>"
-          ),
-          phonetic: "[ə'biliti]",
-          tag_id: 1
-        },
-        {
-          word: "able",
-          trans: "adj. 能；[经管] 有能力的；能干的 <br>able: 有才干的|可······的|有能力的 <br>able leader: 能干的领导人 <br>able trend: 明显趋势".split(
-            "<br>"
-          ),
-          phonetic: "['eibl]",
-          tag_id: 1
+          word: "无数据",
+          phonetic: "无数据",
+          trans: "无数据 <br> 无数据"
         }
       ],
       innerAudioContext: ""
     };
   },
   computed: {
-    speakUrl() {
-      return (
-        "http://dict.youdao.com/dictvoice?audio=" +
-        this.wordList[this.wordCount].word
-      );
-    }
+    ...mapState("plan", {
+      plan: state => state.plan,
+      tag: state => state.tag
+    })
   },
   mounted() {
-    this.setSpeakUrl();
+    this.getWordList();
   },
   watch: {
     wordCount(newWo) {
       console.log("wordCount变化", newWo);
-      this.setSpeakUrl();
+      this.setSpeakUrl(newWo);
     }
   },
   methods: {
+    getWordList() {
+      this.isTranslt = false;
+      selectNewWord({ tagId: this.tag.tagId }).then(res => {
+        res.data.data.forEach(element => {
+          element.trans = element.trans.split("<br>");
+        });
+        this.wordList = res.data.data;
+        this.wordCount = 0;
+        this.setSpeakUrl(this.wordCount);
+      });
+    },
     showTranslt() {
       this.isTranslt = !this.isTranslt;
     },
-    setSpeakUrl() {
+    setSpeakUrl(i) {
+      console.log("2");
       this.innerAudioContext = wx.createInnerAudioContext();
-      this.innerAudioContext.src = this.speakUrl;
+      if (this.wordList.length > 0) {
+        this.innerAudioContext.src =
+          "http://dict.youdao.com/dictvoice?audio=" + this.wordList[i].word;
+      }
+
       console.log(this.innerAudioContext.src);
       this.play();
       //音频的数据链接，用于直接播放。支持云文件ID（2.2.3起）。
@@ -112,18 +112,32 @@ export default {
     stop() {
       this.innerAudioContext.pause();
     },
-    computeWordCount() {
-      if (this.wordCount < this.wordList.length - 1) {
-        this.wordCount++;
-      } else {
-        console.log("已经学习完毕")
-      }
+    computeWordCount(study) {
+      saveStudyWord(study).then(res => {
+        console.log(res.data.data);
+        if (res.data.data) {
+          if (this.wordCount < this.wordList.length - 1) {
+            this.wordCount++;
+          } else {
+            console.log("已经学习完毕");
+          }
+          this.isTranslt = false;
+        }
+      });
     },
     konwWord() {
-      this.computeWordCount();
+      let study = {
+        wordId: this.wordList[this.wordCount].wordId,
+        isReview: 0
+      };
+      this.computeWordCount(study);
     },
     unKonwWord() {
-      this.computeWordCount();
+      let study = {
+        wordId: this.wordList[this.wordCount].wordId,
+        isReview: 1
+      };
+      this.computeWordCount(study);
     }
   }
 };

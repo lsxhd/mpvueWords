@@ -6,12 +6,12 @@ const plan = {
     plan: {
       planId: 0,
       numberDay: 0,
-      wordCount: 0
+      totalNumber: 0
     },
     tag: {
       tagId: 0,
-      name: "",
-      type: ""
+      name: "暂无",
+      type: "暂无"
     }
   },
   mutations: {
@@ -21,11 +21,8 @@ const plan = {
     },
     setTag(state, tag) {
       state.tag = tag;
-    },
-    setPlanAndTag(state, plan, tag) {
-      state.plan = plan;
-      state.tag = tag;
     }
+   
   },
   actions: {},
   getters: {}

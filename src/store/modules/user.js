@@ -3,7 +3,7 @@ const STORAGE_KEY_USER_TOKEN = "token";
 const user = {
   namespaced: true,
   state: {
-    isLogin: false,
+    isLogin: Boolean(wx.getStorageSync(STORAGE_KEY_USER_INFO)),
     userInfo: wx.getStorageSync(STORAGE_KEY_USER_INFO)
       ? JSON.parse(wx.getStorageSync(STORAGE_KEY_USER_INFO))
       : {

@@ -1,23 +1,23 @@
 <template>
   <div class="train">
     <div class="train-day">
-      <div class="train-day-circle">
+      <div v-show="isLogin" class="train-day-circle">
         {{ dayNumber }} <span style="font-size: 0.5rem;">天</span>
       </div>
     </div>
+
     <div class="train-content">
       <div class="train-plan">
         <div class="train-plan-title">
-          {{ plan.numberDay }}
           <span>学习计划</span>
           <div @click="upadatePlan" class="train-plan-Btn">
             修改
           </div>
         </div>
         <div class="train-plan-list">
-          <span>四级考纲词汇派生词</span>
-          <div style="padding-left: 3.2rem;">10 个/日</div>
-          <span>2091 /2091</span>
+          <span>{{ tag.name }}</span>
+          <div style="padding-left: 3.2rem;">{{ plan.numberDay }} 个/日</div>
+          <span>2091 /{{ plan.totalNumber }}</span>
         </div>
       </div>
     </div>
@@ -34,9 +34,7 @@ import { getPlan } from "@/dao/modules/plan";
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
-    return {
-      dayNumber: 210
-    };
+    return {};
   },
   computed: {
     ...mapState("plan", {
@@ -45,28 +43,34 @@ export default {
     }),
     ...mapState("user", {
       isLogin: state => state.isLogin
-    })
+    }),
+    dayNumber() {
+      return Math.floor(this.plan.totalNumber / this.plan.numberDay);
+    }
   },
   mounted() {
-    if (this.isLogin) {
-      getPlan().then(res => {
-        console.log(res);
-        this.setPlanAndTag(res.data.data.plan, res.data.data.tag);
-      });
-    }
+    this.getPlanAndTag();
   },
   watch: {
     isLogin(isLogin) {
-      if (this.isLogin) {
-        getPlan().then(res => {
-          this.setPlanAndTag(res.data.data.plan, res.data.data.tag);
-        });
-      }
+      this.getPlanAndTag();
     }
   },
   methods: {
-    ...mapMutations("plan", ["setPlanAndTag"]),
+    ...mapMutations("plan", ["setPlan", "setTag"]),
     modifyPlan() {},
+    // 获取
+    getPlanAndTag() {
+      console.log("fsd", this.isLogin);
+      if (this.isLogin) {
+        getPlan().then(res => {
+          console.log(res);
+          console.log("res.data.data.tag", res.data.data.tag);
+          this.setPlan(res.data.data.plan);
+          this.setTag(res.data.data.tag);
+        });
+      }
+    },
     gotoRemberWord() {
       wx.navigateTo({ url: "/pages/englishWords/remberWord/main" });
     },

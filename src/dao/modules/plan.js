@@ -9,4 +9,11 @@ export function getPlan(params = {}) {
   });
 }
 
-
+export function updatePlan(params = {}) {
+    return axios({
+      method: "post",
+      url: url + "/updatePlan",
+      data: params
+    });
+  }
+  

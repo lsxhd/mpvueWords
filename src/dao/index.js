@@ -40,17 +40,17 @@ axios.defaults.adapter = function(config) {
           });
     }
     if (config.method.toUpperCase() == "POST") {
-      if (userId) {
-        config.params.userId = config.params.userId
-        ? config.params.userId
-        : userId;
-      }
+      // if (userId) {
+      //   config.data.userId = config.data.userId
+      //   ? config.data.userId
+      //   : userId;
+      // }
 
-      if (openId) {
-        config.params.openId = config.params.openId
-        ? config.params.openId
-        : openId;
-      }
+      // if (openId) {
+      //   config.data.openId = config.data.openId
+      //   ? config.data.openId
+      //   : openId;
+      // }
     }
     console.log("data qian ",config)
     let data = config.method === "get" ? config.params : config.data;
