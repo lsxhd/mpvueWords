@@ -26,7 +26,13 @@ export default {
       "pages/englishWords/shouye/main",
       "pages/englishWords/remberWord/main",
       "pages/englishWords/updatePlan/main",
-      "^pages/index/main",
+      "pages/index/main",
+      "pages/bookStore/bookDetail/main",
+      "^pages/bookStore/shopCar/main",
+      "pages/bookStore/typeBook/main",
+      "pages/bookStore/searchBook/main",
+
+
       "pages/orderList/main",
       "pages/self/main",
       "pages/orderDetail/main",
@@ -47,6 +53,24 @@ export default {
     usingComponents: {
       "van-button": "./static/vantWeapp/button/index",
       "van-card": "./static/vantWeapp/card/index",
+      "van-tag": "./static/vantWeapp/tag/index",
+      "van-goods-action": "./static/vantWeapp/goods-action/index",
+      "van-goods-action-icon": "./static/vantWeapp/goods-action-icon/index",
+      "van-goods-action-button": "./static/vantWeapp/goods-action-button/index",
+      "van-panel": "./static/vantWeapp/panel/index",
+      "van-image": "./static/vantWeapp/image/index",
+      "van-checkbox": "./static/vantWeapp/checkbox/index",
+      "van-checkbox-group": "./static/vantWeapp/checkbox-group/index",
+      "van-stepper": "./static/vantWeapp/stepper/index",
+      "van-submit-bar": "./static/vantWeapp/submit-bar/index",
+      "van-radio": "./static/vantWeapp/radio/index",
+      "van-radio-group": "./static/vantWeapp/radio-group/index",
+      "van-sidebar": "./static/vantWeapp/sidebar/index",
+      "van-sidebar-item": "./static/vantWeapp/sidebar-item/index",
+      "van-nav-bar": "./static/vantWeapp/nav-bar/index",
+      "van-icon": "./static/vantWeapp/icon/index",
+      "van-search": "./static/vantWeapp/search/index",
+
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",
       "i-tabs": "static/iview/tabs/index",
@@ -85,10 +109,10 @@ export default {
           text: "商城"
         },
         {
-          pagePath: "pages/orderList/main",
+          pagePath: "pages/bookStore/shopCar/main",
           selectedIconPath: "static/images/tab2-s.png",
           iconPath: "static/images/tab2.png",
-          text: "订单"
+          text: "购物车"
         },
         {
           pagePath: "pages/self/main",
