@@ -7,6 +7,7 @@
   custom-class="van-calendar__popup--{{ position }}"
   close-icon-class="van-calendar__close-icon"
   show="{{ show }}"
+  punchWordList="{{ punchWordList }}"
   round="{{ round }}"
   position="{{ position }}"
   closeable="{{ showTitle || showSubtitle }}"
@@ -18,14 +19,14 @@
 >
   <template
     is="calendar"
-    data="{{ title, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
+    data="{{ title, punchWordList, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
   />
 </van-popup>
 
 <template
   wx:else
   is="calendar"
-  data="{{ title, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
+  data="{{ title, punchWordList, subtitle, showTitle, showSubtitle, minDate, maxDate, type, color, showMark, formatter, rowHeight, currentDate, safeAreaInsetBottom, showConfirm, confirmDisabledText, confirmText, scrollIntoView, allowSameDay }}"
 />
 
 <van-toast id="van-toast" />

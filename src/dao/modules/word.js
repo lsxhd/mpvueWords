@@ -10,3 +10,12 @@ export function selectNewWord(params = {}) {
 }
 
 
+export function getWordTestList(params = {}) {
+  return axios({
+    method: "get",
+    url: url + "/getWordTestList",
+    params: params
+  });
+}
+
+

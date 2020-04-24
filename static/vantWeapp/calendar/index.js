@@ -18,6 +18,13 @@ VantComponent({
             }
         },
         formatter: null,
+        punchWordList: {
+            type: [null, Array],
+            observer(val) {
+                this.setData({ currentDate: val });
+                this.scrollIntoView();
+            }
+        },
         confirmText: {
             type: String,
             value: '确定'

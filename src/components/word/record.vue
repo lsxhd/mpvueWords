@@ -1,68 +1,77 @@
 <template>
   <div class="recode">
-    <div class="" style="margin-top: 16px">
-      <van-button block type="info">默认按钮</van-button>
-      <i-card
-        title="单词本"
-        extra=">"
-        thumb="https://i.loli.net/2017/08/21/599a521472424.jpg"
-      >
-        <view slot="content">
-          <i-grid>
-            <i-grid-item>
-              <i-grid-icon>
-                <i-icon type="customerservice" />
-              </i-grid-icon>
-              <i-grid-label>听音复习</i-grid-label>
-            </i-grid-item>
-            <i-grid-item>
-              <i-grid-icon>
-                <i-icon type="customerservice" />
-              </i-grid-icon>
-              <i-grid-label>听音复习</i-grid-label>
-            </i-grid-item>
-          </i-grid>
+    <div class="word-background" style="margin-top: 16px">
+      <van-cell title="单词本" size="large" is-link />
+      <van-panel>
+        <view class="girder-yinying">
+          <van-grid clickable column-num="2" gutter="10">
+            <van-grid-item
+              link-type="navigateTo"
+              text="打卡日历"
+              @click.stop="openCalendar"
+            >
+              <div slot="icon">
+                <van-icon name="sign" color="#00b081" />
+              </div>
+            </van-grid-item>
+            <van-grid-item
+              icon="search"
+              link-type="reLaunch"
+              url="/pages/dashboard/index"
+              text="学习统计"
+            />
+          </van-grid>
         </view>
-      </i-card>
+      </van-panel>
     </div>
     <i-divider content="生词复习"></i-divider>
-    <div style="margin: 0 16px">
-      <i-grid>
-        <i-grid-item>
-          <i-grid-icon>
-            <i-icon type="customerservice" />
-          </i-grid-icon>
-          <i-grid-label>听音复习</i-grid-label>
-        </i-grid-item>
-        <i-grid-item>
-          <i-grid-icon>
-            <i-icon type="customerservice" />
-          </i-grid-icon>
-          <i-grid-label>听音复习</i-grid-label>
-        </i-grid-item>
-      </i-grid>
-    </div>
+    <view class="girder-yinying">
+      <van-grid clickable column-num="2" gutter="10">
+        <van-grid-item
+          icon="sign"
+          link-type="navigateTo"
+          url="/pages/dashboard/index"
+          text="打卡日历"
+        />
+        <van-grid-item
+          icon="search"
+          link-type="reLaunch"
+          url="/pages/dashboard/index"
+          text="学习统计"
+        /> </van-grid
+    ></view>
 
     <i-divider content="熟词复习"></i-divider>\
-    <div style="margin: 0 16px">
-      <i-grid>
-        <i-grid-item>
-          <i-grid-icon>
-            <i-icon type="customerservice" />
-          </i-grid-icon>
-          <i-grid-label>熟词巩固</i-grid-label>
-        </i-grid-item>
-      </i-grid>
-    </div>
+    <view class="girder-yinying">
+      <van-grid clickable column-num="2" gutter="10">
+        <van-grid-item
+          link-type="navigateTo"
+          url="/pages/englishWords/test/main"
+          text="识字辨意"
+        >
+          <div slot="icon">
+            <van-icon name="description" color="#00b081" />
+          </div>
+        </van-grid-item>
+      </van-grid>
+    </view>
+    <daKaCalendar :show="show" @close="closeCalendar"></daKaCalendar>
   </div>
 </template>
 
 <script>
+import daKaCalendar from "@/components/public/daKaCalendar.vue";
 import { getPlan } from "@/dao/modules/plan";
 import { mapState, mapMutations } from "vuex";
 export default {
+  components: {
+    daKaCalendar
+  },
+
   data() {
-    return {};
+    return {
+      show: false
+    };
   },
   computed: {
     ...mapState("plan", {
@@ -76,9 +85,19 @@ export default {
   mounted() {},
   watch: {},
   methods: {
-    ...mapMutations("plan", ["setPlan", "setTag"])
+    ...mapMutations("plan", ["setPlan", "setTag"]),
+    openCalendar() {
+      this.show = true;
+    },
+    closeCalendar() {
+      this.show = false;
+    }
   }
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fd {
+  background: gray;
+}
+</style>

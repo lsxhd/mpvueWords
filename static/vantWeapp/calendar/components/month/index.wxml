@@ -22,7 +22,7 @@
       <view wx:if="{{ item.type === 'selected' }}" class="van-calendar__selected-day" style="background: {{ color }}">
         <view wx:if="{{ item.topInfo }}" class="van-calendar__top-info">{{ item.topInfo }}</view>
         {{ item.text }}
-        <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info">
+        <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info"  style="background: #00b081">
           {{ item.bottomInfo }}
         </view>
       </view>
@@ -30,7 +30,7 @@
       <view wx:else>
         <view wx:if="{{ item.topInfo }}" class="van-calendar__top-info">{{ item.topInfo }}</view>
         {{ item.text }}
-        <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info">
+        <view wx:if="{{ item.bottomInfo }}" class="van-calendar__bottom-info" style="background: #00b081">
           {{ item.bottomInfo }}
         </view>
       </view>

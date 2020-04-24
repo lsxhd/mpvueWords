@@ -24,6 +24,7 @@
         minDate="{{ minDate }}"
         maxDate="{{ maxDate }}"
         showMark="{{ showMark }}"
+        punchWordList="{{ punchWordList }}"
         formatter="{{ formatter }}"
         rowHeight="{{ rowHeight }}"
         currentDate="{{ currentDate }}"

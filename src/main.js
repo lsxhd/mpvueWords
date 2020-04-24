@@ -4,6 +4,7 @@ import { openWin, redirectTo, backBeaforWin, Ajax } from "./utils/common";
 import store from "./store/index";
 import "./css/common.css";
 import "./css/iconfont.css";
+import "./css/public.scss";
 
 Vue.config.productionTip = false;
 App.mpType = "app";
@@ -31,7 +32,7 @@ export default {
       "^pages/bookStore/shopCar/main",
       "pages/bookStore/typeBook/main",
       "pages/bookStore/searchBook/main",
-
+      "pages/englishWords/test/main",
 
       "pages/orderList/main",
       "pages/self/main",
@@ -70,6 +71,15 @@ export default {
       "van-nav-bar": "./static/vantWeapp/nav-bar/index",
       "van-icon": "./static/vantWeapp/icon/index",
       "van-search": "./static/vantWeapp/search/index",
+      "van-grid": "./static/vantWeapp/grid/index",
+      "van-grid-item": "./static/vantWeapp/grid-item/index",
+      "van-calendar": "./static/vantWeapp/calendar/index",
+      "van-cell": "./static/vantWeapp/cell/index",
+      "van-cell-group": "./static/vantWeapp/cell-group/index",
+      "van-tab": "./static/vantWeapp/tab/index",
+      "van-tabs": "./static/vantWeapp/tabs/index",
+      "van-collapse": "./static/vantWeapp/collapse/index",
+      "van-collapse-item": "./static/vantWeapp/collapse-item/index",
 
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",

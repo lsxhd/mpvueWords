@@ -20,7 +20,7 @@ import record from "@/components/word/record";
 export default {
   data() {
     return {
-      current: "train"
+      current: "record"
     };
   },
 
