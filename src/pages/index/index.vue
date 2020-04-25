@@ -1,6 +1,6 @@
 <template>
   <div class="container ub-box ub-col">
-    <topSearch ></topSearch>
+    <topSearch></topSearch>
     <!-- <dl class="ub-box ub-ver z-padding-v-10-px" style="background:#fff;">
       <dd
         @click.stop="$openWin('/pages/citySelect/main')"
@@ -46,13 +46,13 @@
       <dl class="ub-box ub-wrap z-padding-v-5-px" style="background:#fff">
         <div
           class="icon-item ub-box ub-col ub-ver"
-          :key="key"
           v-for="(idx, key) in iconMap"
+          :key="key"
+          @click.stop="
+            $openWin('/pages/bookStore/typeBook/main?bookTypeId=' + iconMap[key]['bookTypeId'])
+          "
         >
           <dd
-            @click.stop="
-              $openWin('/pages/bookStore/typeBook/main?bookTypeId=' + key)
-            "
             class="icon ub-box ub-ver iconfont"
             :class="key"
             :style="{ background: iconMap[key]['bk'] }"
@@ -108,11 +108,11 @@ export default {
         "https://img3.doubanio.com/view/subject/m/public/s30021282.jpg"
       ],
       iconMap: {
-        "icon-caigou": { title: "英语考试", bk: "#EF8B3E" },
-        "icon-shangpin": { title: "大学英语", bk: "#E4463B" },
-        "icon-touchengkongyun": { title: "英语读物", bk: "#8B67E5" },
-        "icon-daohang": { title: "英语工具", bk: "#5DC7B0" },
-        "icon-zitigui": { title: "少儿英语", bk: "#F3AE42" }
+        "icon-caigou": { title: "英语考试", bk: "#EF8B3E", bookTypeId: 0 },
+        "icon-shangpin": { title: "大学英语", bk: "#E4463B", bookTypeId: 1 },
+        "icon-touchengkongyun": { title: "英语读物", bk: "#8B67E5", bookTypeId: 2 },
+        "icon-daohang": { title: "英语工具", bk: "#5DC7B0", bookTypeId: 3 },
+        "icon-zitigui": { title: "少儿英语", bk: "#F3AE42", bookTypeId: 4 }
       },
       bookList: []
     };

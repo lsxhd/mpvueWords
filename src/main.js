@@ -5,7 +5,7 @@ import store from "./store/index";
 import "./css/common.css";
 import "./css/iconfont.css";
 import "./css/public.scss";
-
+import Notify from "@/../static/vantWeapp/notify/notify";
 Vue.config.productionTip = false;
 App.mpType = "app";
 // 把通用方法挂载到Vue原型上
@@ -13,6 +13,7 @@ Vue.prototype.$openWin = openWin;
 Vue.prototype.$redirectTo = redirectTo;
 Vue.prototype.$backBeaforWin = backBeaforWin;
 Vue.prototype.$ajax = Ajax;
+Vue.prototype.$Notify = Notify;
 // 把store挂载到Vue原型上
 Vue.prototype.$store = store;
 
@@ -80,6 +81,9 @@ export default {
       "van-tabs": "./static/vantWeapp/tabs/index",
       "van-collapse": "./static/vantWeapp/collapse/index",
       "van-collapse-item": "./static/vantWeapp/collapse-item/index",
+      "van-notify": "./static/vantWeapp/notify/index",
+      "van-popup": "./static/vantWeapp/popup/index",
+      "van-sticky": "./static/vantWeapp/sticky/index",
 
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",

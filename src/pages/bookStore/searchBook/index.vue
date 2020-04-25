@@ -1,6 +1,11 @@
 <template>
   <div class="container ub-box ub-col">
-    <topSearch :isJump="false" @getSearchValue="getSearchValue"> </topSearch>
+    <topSearch
+      :isJump="false"
+      :defaultSearchValue="searchValue"
+      @getSearchValue="getSearchValue"
+    >
+    </topSearch>
     <bookCardList :bookList="bookList"></bookCardList>
   </div>
 </template>
@@ -17,7 +22,8 @@ export default {
   },
   data() {
     return {
-      bookList: []
+      bookList: [],
+      searchValue: ""
     };
   },
   methods: {
@@ -27,13 +33,15 @@ export default {
       });
     },
     getSearchValue(searchValue) {
-      this.getInitialData(searchValue);
+      this.searchValue = searchValue;
+      this.getInitialData(this.searchValue);
     }
   },
   mounted() {},
   onPullDownRefresh() {},
   onLoad: function(options) {
-    console.log(options)
+    console.log(options);
+    this.searchValue = options.searchValue
     this.getInitialData(options.searchValue);
   }
 };

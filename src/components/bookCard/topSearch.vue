@@ -19,11 +19,15 @@ export default {
     isJump: {
       type: Boolean,
       default: true
+    },
+    defaultSearchValue: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      searchValue: ""
+      searchValue: this.defaultSearchValue
     };
   },
   computer: {},

@@ -138,6 +138,7 @@ export default {
   },
   watch: {},
   mounted() {
+    Object.assign(this.$data, this.$options.data());
     this.getWordTestList();
   },
   methods: {

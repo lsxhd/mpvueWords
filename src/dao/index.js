@@ -12,7 +12,6 @@ axios.defaults.headers.post["Content-Type"] =
 axios.defaults.adapter = function(config) {
   return new Promise((resolve, reject) => {
     let { token, userId, openId } = store.state.user.userInfo;
-    console.log("store.state.user.userInfo", store.state.user.userInfo);
     if (config.method.toUpperCase() == "GET") {
       // 追加userId
       if (config.params == null) {
@@ -20,16 +19,16 @@ axios.defaults.adapter = function(config) {
       }
       if (userId) {
         config.params.userId = config.params.userId
-        ? config.params.userId
-        : userId;
+          ? config.params.userId
+          : userId;
       }
-      
+
       if (openId) {
         config.params.openId = config.params.openId
-        ? config.params.openId
-        : openId;
+          ? config.params.openId
+          : openId;
       }
-      
+
       // 防止登录拦截
       // config.params.filter = "sli_admin";
       // get请求防止缓存
@@ -45,24 +44,23 @@ axios.defaults.adapter = function(config) {
       //   ? config.data.userId
       //   : userId;
       // }
-
       // if (openId) {
       //   config.data.openId = config.data.openId
       //   ? config.data.openId
       //   : openId;
       // }
     }
-    console.log("data qian ",config)
+
     let data = config.method === "get" ? config.params : config.data;
-    console.log("data hou ",config)
+
     // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
-    console.log("config", config);
+
     wx.request({
       url: config.baseURL + config.url,
       method: config.method,
       data: data,
       header: {
-        "Authorization": token
+        Authorization: token
       },
       success: res => {
         return resolve(res);
@@ -121,7 +119,6 @@ function Instance() {
   // 添加响应拦截器
   axios.interceptors.response.use(
     function(response) {
-      console.log(response.data.data); //响应成功
       return response;
     },
     function(error) {

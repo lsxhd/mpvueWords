@@ -1,30 +1,37 @@
 <template>
-  <div>
-    <van-nav-bar title="书籍分类列表" left-text="返回" left-arrow>
+  <div class="full">
+    <!-- <van-nav-bar title="书籍分类列表" left-text="返回" left-arrow>
       <view slot="right">
         <van-icon color="blue" name="search" />
       </view>
-    </van-nav-bar>
-    <div class="type-book-content">
-      <van-sidebar :active-key="activeKey" @change="bookTypeChange">
-        <van-sidebar-item title="英语考试" />
-        <van-sidebar-item title="大学英语四六级" />
-        <van-sidebar-item title="英语读物" />
-        <van-sidebar-item title="英语工具书" />
-        <van-sidebar-item title="少儿英语" />
-      </van-sidebar>
-      <bookCardList :bookList="bookList"></bookCardList>
+    </van-nav-bar> -->
+    <topSearch />
+
+    <div class="type-book-content full">
+      <van-sticky>
+        <van-sidebar :active-key="activeKey" @change="bookTypeChange">
+          <van-sidebar-item title="英语考试" />
+          <van-sidebar-item title="大学英语四六级" />
+          <van-sidebar-item title="英语读物" />
+          <van-sidebar-item title="英语工具书" />
+          <van-sidebar-item title="少儿英语" />
+        </van-sidebar>
+      </van-sticky>
+      <div class="full" style="height: 608px">
+        <bookCardList :bookList="bookList"></bookCardList>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import { getBookListByType } from "@/dao/modules/book";
+import topSearch from "@/components/bookCard/topSearch.vue";
 import bookCardList from "@/components/bookCard/bookCardList.vue";
 export default {
   components: { bookCardList },
   data() {
     return {
-      activeKey: 0,
+      activeKey: 3,
       bookList: [],
       isAllchecked: 2
     };
@@ -48,6 +55,7 @@ export default {
     // wx.setNavigationBarTitle({ title: "书籍分类" });
   },
   onLoad: function(options) {
+    console.log("options", options);
     this.activeKey = options.bookTypeId;
   }
 };
