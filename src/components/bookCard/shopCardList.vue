@@ -33,6 +33,7 @@
         </van-checkbox>
       </van-checkbox-group>
     </scroll-view>
+    <van-notify id="van-notify" />
   </div>
 </template>
 <script>
@@ -56,11 +57,6 @@ export default {
         this.shopCarBookList.forEach(element => {
           if (shopCarId == element.shopCarId) {
             totalPrice += element.price * element.bookNumber;
-            console.log(
-              element.price,
-              element.bookNumber,
-              element.price * element.bookNumber
-            );
           }
         });
       });
@@ -74,11 +70,25 @@ export default {
         url: "/pages/bookStore/bookDetail/main?bookId=" + bookId
       });
     },
+    getcheckBook() {
+      let getcheckBook = [];
+      this.allShopList.forEach(shopCarId => {
+        this.shopCarBookList.forEach(element => {
+          if (shopCarId == element.shopCarId) {
+            getcheckBook.push(element);
+          }
+        });
+      });
+
+      console.log("getcheckBook -> getcheckBook", getcheckBook);
+      return getcheckBook;
+    },
     shopCheckedChange(event) {
       console.log(event);
 
       this.allShopList = event.mp.detail;
 
+      this.$emit("getCheckBookList", this.getcheckBook());
       this.$emit("getTotalPrice", this.totalPrice);
     },
     addShopNumber(key) {
@@ -91,6 +101,7 @@ export default {
         if (res.data.data) {
           this.shopCarBookList[key].bookNumber += 1;
           this.$emit("getTotalPrice", this.totalPrice);
+          this.$emit("getCheckBookList", this.getcheckBook());
         }
       });
     },
@@ -113,6 +124,7 @@ export default {
           if (res.data.data) {
             this.shopCarBookList[key].bookNumber -= 1;
             this.$emit("getTotalPrice", this.totalPrice);
+            this.$emit("getCheckBookList", this.getcheckBook());
           }
         });
       }

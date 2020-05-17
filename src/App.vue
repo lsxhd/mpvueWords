@@ -1,3 +1,8 @@
+<template>
+  <div>
+    <van-dialog id="van-dialog" />
+  </div>
+</template>
 <script>
 export default {
   created() {

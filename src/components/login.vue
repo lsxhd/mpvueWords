@@ -10,7 +10,7 @@
       >
         登录
       </button>
-    </slot>
+    </slot> 
   </div>
 </template>
 <script>

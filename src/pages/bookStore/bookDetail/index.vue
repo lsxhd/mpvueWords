@@ -87,6 +87,7 @@
         </div>
       </van-popup>
     </div>
+    <van-notify id="van-notify" />
   </div>
 </template>
 <script>
@@ -113,7 +114,7 @@ export default {
       }).then(res => {
         if (res.data.data) {
           this.showShopInfo = false;
-          this.$Notify({ type: "success", message: "添加成功" });
+          this.$Notify({ type: "success", message: "添加购物车成功" });
         }
       });
     },

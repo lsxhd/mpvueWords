@@ -5,7 +5,7 @@ import store from "@/store/index";
 // 时间戳
 const NewTimeStamp = new Date().getTime();
 
-axios.defaults.baseURL = "https://dai.ngrok2.xiaomiqiu.cn/";
+axios.defaults.baseURL = "https://daisl.xiaomy.net";
 axios.defaults.timeout = 30000;
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";

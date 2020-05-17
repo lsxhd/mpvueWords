@@ -1,7 +1,7 @@
 <template>
   <div class="recode">
     <div class="word-background" style="margin-top: 16px">
-      <van-cell title="单词本" size="large" is-link />
+      <van-cell title="、" size="large" />
       <van-panel>
         <view class="girder-yinying">
           <van-grid clickable column-num="2" gutter="10">
@@ -24,22 +24,22 @@
         </view>
       </van-panel>
     </div>
-    <i-divider content="生词复习"></i-divider>
+    <!-- <i-divider content="生词复习"></i-divider>
     <view class="girder-yinying">
       <van-grid clickable column-num="2" gutter="10">
         <van-grid-item
           icon="sign"
           link-type="navigateTo"
           url="/pages/dashboard/index"
-          text="打卡日历"
+          text="听音辨意"
         />
         <van-grid-item
           icon="search"
           link-type="reLaunch"
           url="/pages/dashboard/index"
-          text="学习统计"
+          text="看意识字"
         /> </van-grid
-    ></view>
+    ></view> -->
 
     <i-divider content="熟词复习"></i-divider>\
     <view class="girder-yinying">
@@ -51,6 +51,15 @@
         >
           <div slot="icon">
             <van-icon name="description" color="#00b081" />
+          </div>
+        </van-grid-item>
+        <van-grid-item
+          link-type="navigateTo"
+          url=""
+          text="测试功能"
+        >
+          <div slot="icon">
+            <van-icon name="edit"/>
           </div>
         </van-grid-item>
       </van-grid>

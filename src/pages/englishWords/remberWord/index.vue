@@ -1,43 +1,51 @@
 <template>
-  <div class="remberWord">
-    <div class="top">
-      <div class="word" @click.stop="play">
-        <p>{{ wordList[wordCount].word || "无数据" }}</p>
-        <p>
-          {{ wordList[wordCount].phonetic || "无数据"
-          }}<i-icon type="systemprompt" />
-        </p>
-      </div>
-      <div class="translt">
-        <div class="cover-translt" v-if="!isTranslt" @click.stop="showTranslt">
-          点击屏幕显示翻译
+  <div class="full top-space-between">
+    <div class="remberWord">
+      <div class="top">
+        <div class="word" @click.stop="play">
+          <p>{{ wordList[wordCount].word || "无数据" }}</p>
+          <p>
+            {{ wordList[wordCount].phonetic || "无数据"
+            }}<i-icon type="systemprompt" />
+          </p>
         </div>
-        <div class="" v-if="isTranslt">
-          <div class="background-grey">翻译&短语</div>
-          <div class="show-translt">
-            <div v-for="(tran, key) in wordList[wordCount].trans" :key="key">
-              <p>
-                <span>{{ tran }}</span>
-              </p>
+        <div class="translt">
+          <div
+            class="cover-translt"
+            v-if="!isTranslt"
+            @click.stop="showTranslt"
+          >
+            点击屏幕显示翻译
+          </div>
+          <div class="" v-if="isTranslt">
+            <div class="background-grey">翻译&短语</div>
+            <div class="show-translt">
+              <div v-for="(tran, key) in wordList[wordCount].trans" :key="key">
+                <p>
+                  <span>{{ tran }}</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="choose-btn">
+        <i-button
+          @click="konwWord"
+          :inline="true"
+          type="success"
+          shape="circle"
+          size="small"
+          >认识</i-button
+        >
+        <i-button @click="unKonwWord" :inline="true" shape="circle" size="small"
+          >不认识</i-button
+        >
+      </div>
     </div>
-
-    <div class="choose-btn">
-      <i-button
-        @click="konwWord"
-        :inline="true"
-        type="success"
-        shape="circle"
-        size="small"
-        >认识</i-button
-      >
-      <i-button @click="unKonwWord" :inline="true" shape="circle" size="small"
-        >不认识</i-button
-      >
-    </div>
+    <div></div>
+    <van-progress :percentage="percentage" />
+    <div></div>
   </div>
 </template>
 
@@ -66,14 +74,16 @@ export default {
     ...mapState("plan", {
       plan: state => state.plan,
       tag: state => state.tag
-    })
+    }),
+    percentage() {
+      return Math.round(((this.wordCount + 1) / this.wordList.length) * 100);
+    }
   },
   mounted() {
     this.getWordList();
   },
   watch: {
     wordCount(newWo) {
-      console.log("wordCount变化", newWo);
       this.setSpeakUrl(newWo);
     }
   },
@@ -93,7 +103,6 @@ export default {
       this.isTranslt = !this.isTranslt;
     },
     setSpeakUrl(i) {
-      console.log("2");
       this.innerAudioContext = wx.createInnerAudioContext();
       if (this.wordList.length > 0) {
         this.innerAudioContext.src =
@@ -119,7 +128,6 @@ export default {
           if (this.wordCount < this.wordList.length - 1) {
             this.wordCount++;
           } else {
-            console.log("已经学习完毕");
           }
           this.isTranslt = false;
         }
@@ -130,6 +138,7 @@ export default {
         wordId: this.wordList[this.wordCount].wordId,
         isReview: 0
       };
+
       this.computeWordCount(study);
     },
     unKonwWord() {
@@ -137,6 +146,7 @@ export default {
         wordId: this.wordList[this.wordCount].wordId,
         isReview: 1
       };
+
       this.computeWordCount(study);
     }
   }
@@ -146,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 .remberWord {
   width: 100%;
-  height: 95%;
+  height: 80%;
 
   display: flex;
   flex-direction: column;
@@ -177,8 +187,10 @@ export default {
   }
   .choose-btn {
     height: 10%;
+    padding: 0 20%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .background-grey {

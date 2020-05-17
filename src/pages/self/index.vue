@@ -29,7 +29,7 @@
           </li> -->
         </ul>
       </dd>
-      <dd v-if="token"  class="z-font-size-18 z-color-333 ub-box ub-ver-v">
+      <dd v-if="token" class="z-font-size-18 z-color-333 ub-box ub-ver-v">
         <div
           @click.stop="exitLogin()"
           class="exitBtn ub-box ub-ver z-font-size-14"
@@ -226,7 +226,7 @@ export default {
       this.checkoutEnd();
     },
     gotoOrderList() {
-      wx.switchTab({ url: "/pages/orderList/main" });
+      wx.navigateTo({ url: "/pages/bookStore/allOrder/main" });
     },
     clickCall() {
       wx.showActionSheet({

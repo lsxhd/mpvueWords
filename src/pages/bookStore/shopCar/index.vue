@@ -7,9 +7,10 @@
         :shopCarBookList="shopCarBookList"
         @getTotalPrice="getTotalPrice"
         @updataData="updataData"
+        @getCheckBookList="getCheckBookList"
       ></shopCardList>
     </scroll-view>
-    <van-submit-bar :price="price" button-text="提交订单" @submit="onSubmit">
+    <van-submit-bar :price="price" button-text="结算" @submit="onSubmit">
       <!-- <van-checkbox
         :value="!isAllchecked"
         checked-color="red"
@@ -30,7 +31,8 @@ export default {
     return {
       shopCarBookList: {},
       isAllchecked: 2,
-      price: 0
+      price: 0,
+      checkedBookList: []
     };
   },
   mounted() {
@@ -49,13 +51,25 @@ export default {
     getTotalPrice(totalPrice) {
       this.price = totalPrice * 100;
     },
+    getCheckBookList(checkedBookList) {
+      this.checkedBookList = checkedBookList;
+    },
     allCheckedChange() {
       this.isAllchecked = !this.isAllchecked;
+    },
+    onSubmit() {
+      let order = {
+        checkedBookList: this.checkedBookList,
+        price: this.price
+      }
+      let tempOrder = JSON.stringify(order)
+      wx.setStorageSync("tempOrder",tempOrder);
+      wx.navigateTo({ url: "/pages/bookStore/order/main"});
     }
   },
-  onShow() {
-    wx.setNavigationBarTitle({ title: "购物车" });
-  },
+  // onShow() {
+
+  // },
   // onLoad: function(options) {
   //   getBookById({ bookId: options.bookId || 2 }).then(res => {
   //     console.log(res);
@@ -64,6 +78,7 @@ export default {
   // }
 
   onShow() {
+    wx.setNavigationBarTitle({ title: "购物车" });
     this.getInitialData();
   }
 };

@@ -6,6 +6,7 @@ import "./css/common.css";
 import "./css/iconfont.css";
 import "./css/public.scss";
 import Notify from "@/../static/vantWeapp/notify/notify";
+import Dialog from "@/../static/vantWeapp/dialog/dialog";
 Vue.config.productionTip = false;
 App.mpType = "app";
 // 把通用方法挂载到Vue原型上
@@ -14,6 +15,7 @@ Vue.prototype.$redirectTo = redirectTo;
 Vue.prototype.$backBeaforWin = backBeaforWin;
 Vue.prototype.$ajax = Ajax;
 Vue.prototype.$Notify = Notify;
+Vue.prototype.$Dialog = Dialog;
 // 把store挂载到Vue原型上
 Vue.prototype.$store = store;
 
@@ -33,6 +35,12 @@ export default {
       "^pages/bookStore/shopCar/main",
       "pages/bookStore/typeBook/main",
       "pages/bookStore/searchBook/main",
+      "pages/bookStore/order/main",
+      "pages/bookStore/orderDetail/main",
+      "pages/bookStore/allOrder/main",
+      "pages/bookStore/address/main",
+      "pages/bookStore/addOrUpdateAddress/main",
+      "pages/bookStore/getCourier/main",
       "pages/englishWords/test/main",
 
       "pages/orderList/main",
@@ -48,7 +56,7 @@ export default {
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "暖暖背单词",
+      navigationBarTitleText: "可可背单词",
       navigationBarTextStyle: "black"
       // enablePullDownRefresh: true
     },
@@ -84,6 +92,14 @@ export default {
       "van-notify": "./static/vantWeapp/notify/index",
       "van-popup": "./static/vantWeapp/popup/index",
       "van-sticky": "./static/vantWeapp/sticky/index",
+      "van-slider": "./static/vantWeapp/slider/index",
+      "van-progress": "./static/vantWeapp/progress/index",
+      "van-field": "./static/vantWeapp/field/index",
+      "van-area": "./static/vantWeapp/area/index",
+      "van-action-sheet": "./static/vantWeapp/action-sheet/index",
+      "van-switch": "./static/vantWeapp/switch/index",
+      "van-divider": "./static/vantWeapp/divider/index",
+      "van-dialog": "./static/vantWeapp/dialog/index",
 
       "i-card": "static/iview/card/index",
       "i-button": "static/iview/button/index",
@@ -104,6 +120,7 @@ export default {
       "i-grid-icon": "static/iview/grid-icon/index",
       "i-grid-label": "static/iview/grid-label/index"
     },
+    navigateToMiniProgramAppIdList: ["wx6885acbedba59c14"],
     tabBar: {
       borderStyle: "white",
       backgroundColor: "#fff",

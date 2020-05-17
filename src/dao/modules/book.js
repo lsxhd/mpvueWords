@@ -17,6 +17,14 @@ export function getBookById(params = {}) {
   });
 }
 
+export function getBookByIds(params = {}) {
+  return axios({
+    method: "post",
+    url: url + "/getBookByIds",
+    data: params
+  });
+}
+
 export function getBookListByType(params = {}) {
   return axios({
     method: "get",

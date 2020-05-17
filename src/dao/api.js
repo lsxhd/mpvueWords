@@ -1,6 +1,6 @@
 const version = 1 // 默认版本1
 
-const headUser = 'mvc/user'
+const headUser = '/mvc/user'
 
 
 // 用户权限
