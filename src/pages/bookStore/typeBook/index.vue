@@ -8,7 +8,7 @@
     <topSearch />
 
     <div class="type-book-content full">
-      <van-sticky>
+      
         <van-sidebar :active-key="activeKey" @change="bookTypeChange">
           <van-sidebar-item title="英语考试" />
           <van-sidebar-item title="大学英语四六级" />
@@ -16,8 +16,8 @@
           <van-sidebar-item title="英语工具书" />
           <van-sidebar-item title="少儿英语" />
         </van-sidebar>
-      </van-sticky>
-      <div class="full" style="height: 608px">
+      
+      <div  style="height: 608px">
         <bookCardList :bookList="bookList"></bookCardList>
       </div>
     </div>

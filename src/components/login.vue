@@ -76,8 +76,8 @@ export default {
           user.code = res.code;
           user.userName = user.nickName;
           getOpenIdEnd(user).then(res => {
-            console.log(res.data.data);
-            _this.loginEnd(res.data.data);
+            console.log("获取用户信息now：：：",res.data.data);
+            _this.loginEnd(res.data.data); 
           });
         }
       });

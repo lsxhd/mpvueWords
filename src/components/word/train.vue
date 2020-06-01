@@ -2,7 +2,7 @@
   <div class="train">
     <div class="train-day">
       <div v-show="isLogin" class="train-day-circle">
-        {{ dayNumber }} <span style="font-size: 0.5rem;">天</span>
+        {{ dayNumber || 0 }} <span style="font-size: 0.5rem;">天</span>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
         <div class="train-plan-list">
           <span>{{ tag.name }}</span>
           <div style="padding-left: 3.2rem;">{{ plan.numberDay }} 个/日</div>
-          <span>2091 /{{ plan.totalNumber }}</span>
+          <div>{{ studyCount }} /{{ plan.totalNumber || 0 }}</div>
         </div>
       </div>
     </div>
@@ -34,7 +34,9 @@ import { getPlan } from "@/dao/modules/plan";
 import { mapState, mapMutations } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      studyCount: 0
+    };
   },
   computed: {
     ...mapState("plan", {
@@ -68,6 +70,7 @@ export default {
           console.log("res.data.data.tag", res.data.data.tag);
           this.setPlan(res.data.data.plan);
           this.setTag(res.data.data.tag);
+          this.studyCount = res.data.data.studyCount;
         });
       }
     },

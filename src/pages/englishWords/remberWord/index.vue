@@ -1,6 +1,6 @@
 <template>
   <div class="full top-space-between">
-    <div class="remberWord">
+    <div class="remberWord" v-if="!isSuccess">
       <div class="top">
         <div class="word" @click.stop="play">
           <p>{{ wordList[wordCount].word || "无数据" }}</p>
@@ -9,13 +9,9 @@
             }}<i-icon type="systemprompt" />
           </p>
         </div>
-        <div class="translt">
-          <div
-            class="cover-translt"
-            v-if="!isTranslt"
-            @click.stop="showTranslt"
-          >
-            点击屏幕显示翻译
+        <div class="translt" @click.stop="showTranslt">
+          <div class="cover-translt" v-if="!isTranslt">
+            点击此处显示翻译
           </div>
           <div class="" v-if="isTranslt">
             <div class="background-grey">翻译&短语</div>
@@ -43,7 +39,9 @@
         >
       </div>
     </div>
-    <div></div>
+    <div v-else style="height: 90%" class="center-1">
+      今日学习已完成
+    </div>
     <van-progress :percentage="percentage" />
     <div></div>
   </div>
@@ -67,7 +65,8 @@ export default {
           trans: "无数据 <br> 无数据"
         }
       ],
-      innerAudioContext: ""
+      innerAudioContext: "",
+      isSuccess: false
     };
   },
   computed: {
@@ -78,6 +77,21 @@ export default {
     percentage() {
       return Math.round(((this.wordCount + 1) / this.wordList.length) * 100);
     }
+    // isSuccess() {
+    //   let wordList = [
+    //     {
+    //       word: "无数据",
+    //       phonetic: "无数据",
+    //       trans: "无数据 <br> 无数据"
+    //     }
+    //   ]
+    //   if(this.wordList.length == wordCount || this.wordList == wordList ) {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+
+    // }
   },
   mounted() {
     this.getWordList();
@@ -94,9 +108,14 @@ export default {
         res.data.data.forEach(element => {
           element.trans = element.trans.split("<br>");
         });
-        this.wordList = res.data.data;
-        this.wordCount = 0;
-        this.setSpeakUrl(this.wordCount);
+        if (res.data.data.length == 0) {
+          this.isSuccess = true;
+        } else {
+          this.wordList = res.data.data;
+          this.wordCount = 0;
+          this.setSpeakUrl(this.wordCount);
+          this.isSuccess = false;
+        }
       });
     },
     showTranslt() {
@@ -128,6 +147,7 @@ export default {
           if (this.wordCount < this.wordList.length - 1) {
             this.wordCount++;
           } else {
+            this.isSuccess = true;
           }
           this.isTranslt = false;
         }
@@ -138,7 +158,6 @@ export default {
         wordId: this.wordList[this.wordCount].wordId,
         isReview: 0
       };
-
       this.computeWordCount(study);
     },
     unKonwWord() {
@@ -146,7 +165,6 @@ export default {
         wordId: this.wordList[this.wordCount].wordId,
         isReview: 1
       };
-
       this.computeWordCount(study);
     }
   }

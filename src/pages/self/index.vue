@@ -12,7 +12,7 @@
         class="ub-flex-1 z-font-size-18 z-color-333 ub-box ub-ver-v z-padding-h-10-px"
       >
         <button
-          v-if="!token"
+          v-if="!isLogin"
           class="loginBtn"
           lang="zh_CN"
           open-type="getUserInfo"
@@ -29,7 +29,7 @@
           </li> -->
         </ul>
       </dd>
-      <dd v-if="token" class="z-font-size-18 z-color-333 ub-box ub-ver-v">
+      <dd v-if="isLogin" class="z-font-size-18 z-color-333 ub-box ub-ver-v">
         <div
           @click.stop="exitLogin()"
           class="exitBtn ub-box ub-ver z-font-size-14"

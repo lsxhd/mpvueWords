@@ -1,17 +1,28 @@
 import axios from "axios";
 import qs from "qs";
-import store from "@/store/index";
+// import store from "@/store/index";
 
 // 时间戳
 const NewTimeStamp = new Date().getTime();
 
-axios.defaults.baseURL = "https://daisl.xiaomy.net";
+// axios.defaults.baseURL = "https://0o4dtncy.xiaomy.net";
+axios.defaults.baseURL = "https://dai.ngrok2.xiaomiqiu.cn";
+// axios.defaults.baseURL = "http://daisl.free.idcfengye.com"
 axios.defaults.timeout = 30000;
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";
 axios.defaults.adapter = function(config) {
   return new Promise((resolve, reject) => {
-    let { token, userId, openId } = store.state.user.userInfo;
+    // let { token, userId, openId } = store.state.user.userInfo;
+
+    let token = null;
+    let userId = null;
+    let openId = null;
+    // if (store.state.user.isLogin) {
+    //   token = store.state.user.userInfo.token;
+    //   userId = store.state.user.userInfo.userId;
+    //   openId = store.state.user.userInfo.openId;
+    // }
     if (config.method.toUpperCase() == "GET") {
       // 追加userId
       if (config.params == null) {

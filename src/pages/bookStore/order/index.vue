@@ -31,6 +31,7 @@
 <script>
 import topSearch from "@/components/bookCard/topSearch.vue";
 import { getDefaultAddress, getAddressById } from "@/dao/modules/address";
+import { pay } from "@/dao/modules/user";
 import { saveOrUpdate } from "@/dao/modules/order";
 import orderBookList from "@/components/bookCard/orderBookList.vue";
 import { combineSydwCore } from "@/utils/common.js";
@@ -107,48 +108,56 @@ export default {
     },
     onSubmit() {
       this.setOrder();
-      // let OBJECT ={
-      //   timeStamp: '',
-      //   nonceStr: '',
-      //   package: '',
-      //   signType: '',
-      //   paySign: '',
-      //   success: function(res){
-      //     console.log("支付",res)
-      //   },
-      //   fail: function(res){
-      //     console.log("支付",res)
-      //   }
-      // }
-      // wx.requestPayment(OBJECT)
-      this.$Dialog
-        .confirm({
-          title: "微信支付",
-          message: "支付内容",
-          asyncClose: true
-        })
-        .then(() => {
-          this.order.orderStatus = 2;
-          saveOrUpdate(this.order).then(res => {
-            this.$Dialog.close();
-            wx.navigateTo({
-              url:
-                "/pages/bookStore/orderDetail/main?orderId=" +
-                res.data.data.orderId
-            });
-          });
-        })
-        .catch(() => {
-          this.order.orderStatus = 1;
-          saveOrUpdate(this.order).then(res => {
-            this.$Dialog.close();
-            wx.navigateTo({
-              url:
-                "/pages/bookStore/orderDetail/main?orderId=" +
-                res.data.data.orderId
-            });
-          });
-        });
+      this.order.orderStatus = 2;
+      pay(this.order).then(res => {
+        let payInfo = res.data.data.data;
+        console.log("支付信息", res);
+        let OBJECT = {
+          timeStamp: "",
+          nonceStr: "",
+          package: "",
+          signType: "MD5",
+          paySign: "",
+          success: function(res) {
+            console.log("支付", res);
+          },
+          fail: function(res) {
+            console.log("支付", res);
+          }
+        };
+        OBJECT = Object.assign({}, OBJECT, payInfo);
+        console.log(OBJECT, payInfo);
+        wx.requestPayment(OBJECT);
+      });
+
+      // this.$Dialog
+      //   .confirm({
+      //     title: "微信支付",
+      //     message: "支付内容",
+      //     asyncClose: true
+      //   })
+      //   .then(() => {
+      //     this.order.orderStatus = 2;
+      //     saveOrUpdate(this.order).then(res => {
+      //       this.$Dialog.close();
+      //       wx.navigateTo({
+      //         url:
+      //           "/pages/bookStore/orderDetail/main?orderId=" +
+      //           res.data.data.orderId
+      //       });
+      //     });
+      //   })
+      //   .catch(() => {
+      //     this.order.orderStatus = 1;
+      //     saveOrUpdate(this.order).then(res => {
+      //       this.$Dialog.close();
+      //       wx.navigateTo({
+      //         url:
+      //           "/pages/bookStore/orderDetail/main?orderId=" +
+      //           res.data.data.orderId
+      //       });
+      //     });
+      //   });
     }
   },
 

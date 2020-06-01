@@ -16,7 +16,7 @@ const user = {
   mutations: {
     //登录操作
     loginEnd(state, userInfo) {
-      console.log("登录", userInfo, JSON.stringify(userInfo));
+      console.log("登录fdsdf", userInfo, JSON.stringify(userInfo));
       state.userInfo = userInfo;
       wx.setStorageSync(
         STORAGE_KEY_USER_TOKEN,

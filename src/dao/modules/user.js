@@ -10,4 +10,10 @@ export function getOpenIdEnd(params = {}) {
   });
 }
 
-
+export function pay(params = {}) {
+  return axios({
+    method: "Post",
+    url: "/mvc/user/pay",
+    data: params
+  });
+}
