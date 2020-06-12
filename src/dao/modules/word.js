@@ -19,3 +19,12 @@ export function getWordTestList(params = {}) {
 }
 
 
+export function reviewWord(params = {}) {
+  return axios({
+    method: "get",
+    url: "/mvc/study" + "/reviewWord",
+    params: params
+  });
+}
+
+

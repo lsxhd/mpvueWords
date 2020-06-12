@@ -27,12 +27,14 @@ export default {
   config: {
     // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
     pages: [
+      "^pages/personal/main",
+      "pages/self/main",
       "pages/englishWords/shouye/main",
       "pages/englishWords/remberWord/main",
       "pages/englishWords/updatePlan/main",
       "pages/index/main",
       "pages/bookStore/bookDetail/main",
-      "^pages/bookStore/shopCar/main",
+      "pages/bookStore/shopCar/main",
       "pages/bookStore/typeBook/main",
       "pages/bookStore/searchBook/main",
       "pages/bookStore/order/main",
@@ -42,16 +44,16 @@ export default {
       "pages/bookStore/addOrUpdateAddress/main",
       "pages/bookStore/getCourier/main",
       "pages/englishWords/test/main",
-
       "pages/orderList/main",
-      "pages/self/main",
       "pages/orderDetail/main",
       "pages/goodDetail/main",
       "pages/comment/main",
       "pages/submit/main",
       "pages/citySelect/main",
       "pages/search/main",
-      "pages/error/main"
+      "pages/error/main",
+      "pages/login/main",
+      "pages/englishWords/review/main",
     ],
     window: {
       backgroundTextStyle: "light",
@@ -146,7 +148,7 @@ export default {
           text: "购物车"
         },
         {
-          pagePath: "pages/self/main",
+          pagePath: "pages/personal/main",
           selectedIconPath: "static/images/tab3-s.png",
           iconPath: "static/images/tab3.png",
           text: "我的"

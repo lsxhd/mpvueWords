@@ -53,10 +53,10 @@
           @click.stop="openShop"
           type="warning"
         />
-        <van-goods-action-button text="立即购买" />
+        <van-goods-action-button text="立即购买" @click.stop="openBuyInfo" />
       </van-goods-action>
     </div>
-    <!-- 购买数量等信息 -->
+    <!-- 购物车购买数量等信息 -->
     <div>
       <van-popup
         z-index="3"
@@ -87,6 +87,37 @@
         </div>
       </van-popup>
     </div>
+    <!-- 立即购买数量等信息 -->
+    <div>
+      <van-popup
+        z-index="3"
+        :show="showBuyInfo"
+        round
+        position="bottom"
+        custom-style="height: 50%"
+        @close="onClose"
+      >
+        <div class="top-space-between full">
+          <van-card
+            :price="bookInfo.price"
+            :title="bookInfo.title"
+            :thumb="bookInfo.imgUrl"
+          />
+          <van-cell-group>
+            <van-cell title="购买数量">
+              <van-stepper
+                :value="bookNumber"
+                integer
+                @change="bookNymberChange"
+              />
+            </van-cell>
+          </van-cell-group>
+          <van-button type="danger" round block @click.stop="buy"
+            >确定</van-button
+          >
+        </div>
+      </van-popup>
+    </div>
     <van-notify id="van-notify" />
   </div>
 </template>
@@ -100,6 +131,7 @@ export default {
     return {
       bookInfo: {},
       showShopInfo: false,
+      showBuyInfo: false,
       bookNumber: 1
     };
   },
@@ -118,11 +150,27 @@ export default {
         }
       });
     },
+    openBuyInfo() {
+      this.showBuyInfo = true;
+    },
+    buy() {
+      let tem = []
+      this.bookInfo.bookNumber = this.bookNumber
+      tem.push(this.bookInfo)
+      let order = {
+        checkedBookList: tem,
+        price: this.bookInfo.price * this.bookNumber * 100
+      };
+      let tempOrder = JSON.stringify(order);
+      wx.setStorageSync("tempOrder", tempOrder);
+      wx.navigateTo({ url: "/pages/bookStore/order/main" });
+    },
     bookNymberChange(value) {
       this.bookNumber = value.mp.detail;
     },
     onClose() {
       this.showShopInfo = false;
+      this.showBuyInfo = false;
     }
   },
   onShow() {

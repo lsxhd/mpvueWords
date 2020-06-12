@@ -109,8 +109,11 @@ export default {
     onSubmit() {
       this.setOrder();
       this.order.orderStatus = 2;
+      let _this = this
       pay(this.order).then(res => {
-        let payInfo = res.data.data.data;
+        let _2this = _this
+        let payInfo = res.data.data.json.data;
+        let orderId = res.data.data.orderId;
         console.log("支付信息", res);
         let OBJECT = {
           timeStamp: "",
@@ -120,9 +123,16 @@ export default {
           paySign: "",
           success: function(res) {
             console.log("支付", res);
+            wx.navigateTo({ url: "/pages/bookStore/allOrder/main"});
           },
           fail: function(res) {
-            console.log("支付", res);
+            console.log("失败orderId", orderId)
+            _2this.order.orderId = orderId
+            _2this.order.orderStatus = 1
+            saveOrUpdate(_2this.order).then(res=>{
+              console.log("失败res", res)
+               wx.navigateTo({ url: "/pages/bookStore/allOrder/main"});
+            })
           }
         };
         OBJECT = Object.assign({}, OBJECT, payInfo);
@@ -175,6 +185,7 @@ export default {
       this.getDefaultAddress();
     }
     let tempOrder = JSON.parse(wx.getStorageSync("tempOrder"));
+    console.log("tempOrder", tempOrder);
     this.bookList = tempOrder.checkedBookList;
     this.price = tempOrder.price;
   }

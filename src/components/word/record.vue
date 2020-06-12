@@ -14,12 +14,12 @@
                 <van-icon name="sign" color="#00b081" />
               </div>
             </van-grid-item>
-            <van-grid-item
+            <!-- <van-grid-item
               icon="search"
               link-type="reLaunch"
               url="/pages/dashboard/index"
               text="学习统计"
-            />
+            /> -->
           </van-grid>
         </view>
       </van-panel>
@@ -55,11 +55,11 @@
         </van-grid-item>
         <van-grid-item
           link-type="navigateTo"
-          url=""
-          text="测试功能"
+          url="/pages/englishWords/review/main"
+          text="复习功能"
         >
           <div slot="icon">
-            <van-icon name="edit"/>
+            <van-icon name="edit"  color="#00b081"/>
           </div>
         </van-grid-item>
       </van-grid>

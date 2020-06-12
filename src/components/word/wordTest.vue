@@ -15,7 +15,11 @@
               style="height: 200rpx"
               use-slot
             >
-              <van-radio :name="key" :disabled="isDisable">
+              <van-radio
+                :name="key"
+                :disabled="isDisable"
+                style="height: 200rpx;overflow:scroll;"
+              >
                 <p v-for="tran in quest.trans" :key="tran">
                   {{ tran }}
                 </p>

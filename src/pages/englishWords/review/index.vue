@@ -40,15 +40,15 @@
       </div>
     </div>
     <div v-else style="height: 90%" class="center-1">
-      今日学习已完成
+      暂无复习内容
     </div>
-    <van-progress :percentage="percentage" />
+    <!-- <van-progress :percentage="percentage" /> -->
     <div></div>
   </div>
 </template>
 
 <script>
-import { selectNewWord } from "@/dao/modules/word";
+import { reviewWord } from "@/dao/modules/word";
 import { saveStudyWord } from "@/dao/modules/study";
 
 import { mapState, mapMutations } from "vuex";
@@ -104,7 +104,7 @@ export default {
   methods: {
     getWordList() {
       this.isTranslt = false;
-      selectNewWord({ tagId: this.tag.tagId }).then(res => {
+      reviewWord().then(res => {
         res.data.data.forEach(element => {
           element.trans = element.trans.split("<br>");
         });

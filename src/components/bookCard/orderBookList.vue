@@ -12,7 +12,7 @@
           :price="shopCarBook.price"
           :title="shopCarBook.title"
           :thumb="shopCarBook.imgUrl"
-          num="2"
+          :num="shopCarBook.bookNumber"
         >
         </van-card>
       </view>

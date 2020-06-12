@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from "qs";
-// import store from "@/store/index";
+import store from "@/store/index";
 
 // 时间戳
 const NewTimeStamp = new Date().getTime();
@@ -13,11 +13,11 @@ axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=UTF-8";
 axios.defaults.adapter = function(config) {
   return new Promise((resolve, reject) => {
-    // let { token, userId, openId } = store.state.user.userInfo;
+    let { token, userId, openId } = store.state.user.userInfo;
 
-    let token = null;
-    let userId = null;
-    let openId = null;
+    // let token = null;
+    // let userId = null;
+    // let openId = null;
     // if (store.state.user.isLogin) {
     //   token = store.state.user.userInfo.token;
     //   userId = store.state.user.userInfo.userId;
@@ -130,6 +130,12 @@ function Instance() {
   // 添加响应拦截器
   axios.interceptors.response.use(
     function(response) {
+      console.log("Instance -> response", response);
+
+      if (response.data.code == 10001) {
+        console.log("Instance -> response", "跳转");
+        wx.redirectTo({ url: "/pages/login/main" });
+      }
       return response;
     },
     function(error) {

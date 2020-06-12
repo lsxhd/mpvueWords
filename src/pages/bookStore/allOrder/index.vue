@@ -4,8 +4,9 @@
       <van-tabs sticky swipeable :active="active" @change="getAllOrder">
         <van-tab name="0" title="全部"> </van-tab>
         <van-tab name="1" title="待付款"></van-tab>
-        <van-tab name="2" title="待收货"></van-tab>
-        <van-tab name="3" title="已完成"></van-tab>
+        <van-tab name="2" title="待发货"></van-tab>
+        <van-tab name="3" title="待收货"></van-tab>
+        <van-tab name="4" title="已完成"></van-tab>
       </van-tabs>
     </van-sticky>
     <div class="cardContainer">
